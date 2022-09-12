@@ -3,6 +3,18 @@ import { supabase } from "@/supabase";
 import type { Poems } from "@/type";
 import { useRouter } from "vue-router";
 const router = useRouter();
+const props = defineProps<{ id?: number }>();
+let dataPoem: Poems = {};
+if (props.id) {
+  const { data, error } = await supabase
+    .from<Poems>("poems")
+    .select("*")
+    .eq("id", props.id)
+    .single();
+  if (error) console.error("n'a pas pu retrouver l'id :", props.id, error);
+  if (data) dataPoem = data;
+  else console.error("pas trouvé dans la table poems l'id :", props.id);
+}
 async function submit(formData: Poems) {
   const { data, error } = await supabase.from("poems").upsert(formData);
   if (error) console.error("Erreur lors de l'envoi d'un poem : ", error);
@@ -14,6 +26,7 @@ async function submit(formData: Poems) {
 <template>
   <FormKit
     @submit="submit"
+    :value="dataPoem"
     type="form"
     :config="{
       classes: {

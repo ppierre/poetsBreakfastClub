@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import FormPoems from "../../components/FormPoems.vue";
+const props = defineProps<{ id: string }>();
+</script>
 <template>
-  <div class="p-2">TODO</div>
+  <FormPoems :id="Number(id)" />
 </template>
