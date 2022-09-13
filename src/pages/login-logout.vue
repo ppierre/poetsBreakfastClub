@@ -2,7 +2,6 @@
 import { ref } from "@vue/reactivity";
 import { supabase, user } from "../supabase";
 async function signIn(data) {
-  debugger;
   const { user, error } = await (nvlUtilisateur
     ? supabase.auth.signUp(data)
     : supabase.auth.signIn(data));
