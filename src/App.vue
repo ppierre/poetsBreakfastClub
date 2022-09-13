@@ -24,6 +24,11 @@ import { user } from "./supabase";
           Ajouter Poem
         </router-link>
       </li>
+      <li v-if="user">
+        <router-link class="text-red-600 underline" to="/gallery">
+          Ajouter Images
+        </router-link>
+      </li>
     </ul>
   </nav>
 

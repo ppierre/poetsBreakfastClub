@@ -21,6 +21,11 @@ create policy "Enable update for users based on email" on poems
     for all
     using (auth.email() = (email)::text)
     with check (auth.email() = (email)::text);
+
+CREATE POLICY "Give users access to own folder 1ffg0oo_0" ON storage.objects FOR INSERT TO public WITH CHECK (bucket_id = 'images' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Give users access to own folder 1ffg0oo_1" ON storage.objects FOR SELECT TO public USING (bucket_id = 'images' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Give users access to own folder 1ffg0oo_2" ON storage.objects FOR DELETE TO public USING (bucket_id = 'images' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "Give users access to own folder 1ffg0oo_3" ON storage.objects FOR UPDATE TO public USING (bucket_id = 'images' AND auth.uid()::text = (storage.foldername(name))[1]);
     
 alter table poems
     owner to supabase_admin;
