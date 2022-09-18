@@ -7,7 +7,7 @@ async function signIn(data, node) {
     : supabase.auth.signIn(data));
   if (error) {
     console.error(error);
-    node.errors([error.message]);
+    node.setErrors([error.message]);
   }
 }
 const nvlUtilisateur = ref(false);
