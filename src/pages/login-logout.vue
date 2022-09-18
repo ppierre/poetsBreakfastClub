@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref } from "@vue/reactivity";
 import { supabase, user } from "../supabase";
-async function signIn(data) {
+async function signIn(data, node) {
   const { user, error } = await (nvlUtilisateur
     ? supabase.auth.signUp(data)
     : supabase.auth.signIn(data));
-  if (error) console.error(error);
+  if (error) {
+    console.error(error);
+    node.errors([error.message]);
+  }
 }
 const nvlUtilisateur = ref(false);
 </script>
